@@ -46,7 +46,9 @@ export function Settings({ onSynced }: { onSynced: () => void }) {
         </CardHeader>
         <CardContent className="space-y-3">
           <div className="max-w-sm">
-            <div className="text-xs text-slate-500 mb-1">Nama perusahaan di header label</div>
+            <div className="text-xs text-slate-500 mb-1">
+              Nama perusahaan di header label (dipakai jika No. Surat Jalan tidak diawali S/SJ, SJ/, atau J/SJ)
+            </div>
             <Input
               value={form.companyName}
               onChange={(e) => setForm({ ...form, companyName: e.target.value })}

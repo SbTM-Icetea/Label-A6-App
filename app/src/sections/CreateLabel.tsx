@@ -30,6 +30,8 @@ export function CreateLabel() {
   const fileRef = useRef<HTMLInputElement>(null);
   const settings = loadSettings();
   const customers = loadCustomers();
+  // Header label otomatis mengikuti awalan No. Surat Jalan
+  const companyName = companyFromSJ(label?.noSuratJalan || '', settings.companyName);
 
   const buildLabel = useCallback(
     (slip: ParsedSlip, custOverride?: Customer | null) => {
@@ -267,7 +269,7 @@ export function CreateLabel() {
         <div className="text-sm font-semibold text-slate-500 mb-2">Preview Label A6 (105 × 148 mm)</div>
         <div className="inline-block shadow-lg rounded" style={{ zoom: 1 }}>
           {label ? (
-            <ShippingLabel data={label} companyName={settings.companyName} />
+            <ShippingLabel data={label} companyName={companyName} />
           ) : (
             <ShippingLabel
               data={{
@@ -278,7 +280,7 @@ export function CreateLabel() {
                 telp: '',
                 items: [],
               }}
-              companyName={settings.companyName}
+              companyName={companyName}
             />
           )}
         </div>
@@ -289,7 +291,7 @@ export function CreateLabel() {
         {label &&
           Array.from({ length: copies }).map((_, i) => (
             <div key={i} className="print-page">
-              <ShippingLabel data={label} companyName={settings.companyName} />
+              <ShippingLabel data={label} companyName={companyName} />
             </div>
           ))}
       </div>

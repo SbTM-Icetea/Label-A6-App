@@ -1,5 +1,14 @@
 import type { Customer, Product, SlipItem } from '@/types';
 
+/** Tentukan nama header label dari awalan No. Surat Jalan. */
+export function companyFromSJ(noSuratJalan: string, fallback: string): string {
+  const sj = (noSuratJalan || '').trim().toUpperCase();
+  if (sj.startsWith('S/SJ')) return 'SINARBINTANG TIMRA MEDAN';
+  if (sj.startsWith('J/SJ')) return 'JTA';
+  if (sj.startsWith('SJ/') || sj.startsWith('SJ-') || sj.startsWith('SJ')) return 'SINAR BINTANG TUNGGAL MANDIRI';
+  return fallback;
+}
+
 function norm(s: string): string {
   return s
     .toLowerCase()
